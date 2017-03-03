@@ -1,1 +1,38 @@
-<h1>TODO/INDEX</h1>
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <table class="table table-striped text-center">
+        <thead>
+            <tr >
+                <th>#</th>
+                <th class="text-center">Задача</th>
+                <th class="text-center">Дата</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope=row>1</th>
+                <td>Название</td>
+                <td>Дата</td>
+                <td>
+                    <a href="todo/details/1" class="btn btn-info">Подробнее</a>
+                    <div class="pull-right">
+                        <a href="todo/edit/1" class="btn btn-warning text-right">Править</a>
+                        <a href="todo/delete/1" class="btn btn-danger text-right">Удалить</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+{% block stylesheets %}
+    <style>
+        body {
+            font-size: 1.8em;
+        }
+    </style>
+{% endblock %}
+{% endblock %}

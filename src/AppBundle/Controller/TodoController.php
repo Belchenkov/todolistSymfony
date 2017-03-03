@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TodoController extends Controller
 {
     /**
-     * @Route("/todos", name="todo_list")
+     * @Route("/", name="todo_list")
      */
     public function listAction()
     {
@@ -38,5 +38,13 @@ class TodoController extends Controller
     public function detailsAction($id)
     {
         return $this->render('todo/details.html.twig');
+    }
+
+    /**
+     * @Route("/todo/delete/{id}", name="todo_delete")
+     */
+    public function deleteAction($id)
+    {
+
     }
 }
