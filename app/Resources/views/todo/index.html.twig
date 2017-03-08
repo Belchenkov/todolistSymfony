@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
 
 
+
 {% block body %}
+
     <table class="table table-striped text-center">
         <thead>
             <tr >
                 <th>#</th>
                 <th class="text-center">Задача</th>
-                <th class="text-center">Дата</th>
+                <th class="text-center">Deadline</th>
                 <th class="text-center"></th>
             </tr>
         </thead>
         <tbody>
+
+        {% for todo in todos  %}
             <tr>
-                <th scope=row>1</th>
-                <td>Название</td>
-                <td>Дата</td>
+                <th scope=row>{{ todo.id }}</th>
+                <td>{{ todo.name }}</td>
+                <td>{{ todo.dueDate|date('F j, Y g:i') }}</td>
                 <td>
                     <a href="todo/details/1" class="btn btn-info">Подробнее</a>
                     <div class="pull-right">
@@ -24,15 +28,14 @@
                     </div>
                 </td>
             </tr>
+
+        {% endfor %}
+
         </tbody>
     </table>
 
 
 {% block stylesheets %}
-    <style>
-        body {
-            font-size: 1.8em;
-        }
-    </style>
+    
 {% endblock %}
 {% endblock %}

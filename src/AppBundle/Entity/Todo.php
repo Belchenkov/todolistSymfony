@@ -1,24 +1,86 @@
 <?php
 
-namespace AppBundle/Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Todo
+ *
+ * @ORM\Table(name="todo")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TodoRepository")
+ */
 class Todo
 {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="string", length=255)
+     */
     private $category;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
     private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="priority", type="string", length=255)
+     */
     private $priority;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="due_date", type="datetimetz")
+     */
     private $dueDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_date", type="datetimetz")
+     */
     private $createDate;
 
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Todo
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -26,11 +88,23 @@ class Todo
         return $this;
     }
 
+    /**
+     * Get name
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set category
+     *
+     * @param string $category
+     *
+     * @return Todo
+     */
     public function setCategory($category)
     {
         $this->category = $category;
@@ -38,11 +112,23 @@ class Todo
         return $this;
     }
 
+    /**
+     * Get category
+     *
+     * @return string
+     */
     public function getCategory()
     {
         return $this->category;
     }
 
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Todo
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -50,11 +136,23 @@ class Todo
         return $this;
     }
 
+    /**
+     * Get description
+     *
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;
     }
 
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     *
+     * @return Todo
+     */
     public function setPriority($priority)
     {
         $this->priority = $priority;
@@ -62,32 +160,62 @@ class Todo
         return $this;
     }
 
+    /**
+     * Get priority
+     *
+     * @return string
+     */
     public function getPriority()
     {
         return $this->priority;
     }
 
-    public function setDueDate($due_date)
+    /**
+     * Set dueDate
+     *
+     * @param \DateTime $dueDate
+     *
+     * @return Todo
+     */
+    public function setDueDate($dueDate)
     {
-        $this->due_date = $due_date;
+        $this->dueDate = $dueDate;
 
         return $this;
     }
 
+    /**
+     * Get dueDate
+     *
+     * @return \DateTime
+     */
     public function getDueDate()
     {
-        return $this->due_date;
+        return $this->dueDate;
     }
 
-    public function setCreateDate($create_date)
+    /**
+     * Set createDate
+     *
+     * @param \DateTime $createDate
+     *
+     * @return Todo
+     */
+    public function setCreateDate($createDate)
     {
-        $this->create_date = $create_date;
+        $this->createDate = $createDate;
 
         return $this;
     }
 
+    /**
+     * Get createDate
+     *
+     * @return \DateTime
+     */
     public function getCreateDate()
     {
-        return $this->create_date;
+        return $this->createDate;
     }
 }
+
