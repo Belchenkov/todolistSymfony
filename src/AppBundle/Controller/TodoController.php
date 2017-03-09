@@ -136,7 +136,7 @@ class TodoController extends Controller
                     $em->flush();
 
                     $this->addFlash(
-                        'notice', 'Задача изменена'
+                        'notice', 'Задача обновлена'
                     );
 
                     return $this->redirectToRoute('todo_list');
@@ -169,6 +169,16 @@ class TodoController extends Controller
      */
     public function deleteAction($id)
     {
+         $em = $this->getDoctrine()->getManager();
+         $todo = $em->getRepository('AppBundle:Todo')->find($id);
 
+         $em->remove($todo);
+         $em->flush();
+
+         $this->addFlash(
+                        'notice', 'Задача удалена'
+                    );
+
+         return $this->redirectToRoute('todo_list');
     }
 }
