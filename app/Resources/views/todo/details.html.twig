@@ -2,5 +2,15 @@
 
 
 {% block body %}
-    <h1>TODO/DETAILS</h1>
+    <a href="/" class="btn btn-default">Вернуться</a>
+    <hr />
+    <h2 class="page-header">{{ todo.name }}</h2>
+    <ul class="list-group">
+        <li class="list-group-item">Категория: {{ todo.category }}</li>
+        <li class="list-group-item">Приоритетность: {{ todo.priority }}</li>
+        <li class="list-group-item">Дата окончания: <strong>{{ todo.dueDate|date('F j, Y g:i') }}</strong></li>
+    </ul>
+    <p class="lead">
+        {{ todo.description }}
+    </p>
 {% endblock %}
