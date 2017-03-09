@@ -88,7 +88,67 @@ class TodoController extends Controller
      */
     public function editAction($id, Request $request)
     {
-        return $this->render('todo/edit.html.twig');
+         $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+
+        $now = new \DateTime('now');
+
+        $todo->setName($todo->getName());
+        $todo->setCategory($todo->getCategory());
+        $todo->setDescription($todo->getDescription());
+        $todo->setPriority($todo->getPriority());
+        $todo->setDueDate($todo->getDueDate());
+        $todo->setCreateDate($now);
+        
+
+         $form = $this->createFormBuilder($todo)
+                ->add('name', TextType::class, ['attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px'], 'label' => 'Название задачи' ])
+                ->add('category', TextType::class, ['attr' => ['class' => 'form-control', 'style' => 'margin-bottom: 15px'], 'label' => 'Категория' ])
+                ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control', 'style' => 'margin-bottom: 15px'], 'label' => 'Описание' ])
+                ->add('priority', ChoiceType::class, ['choices' => ['Низкий' => 'Low', 'Средний' => 'Normal', 'Высокий' => 'High'], 'attr' => ['class' => 'form-control', 'style' => 'margin-bottom: 15px'], 'label' => 'Уровень приоритета' ])
+                ->add('due_date', DateTimeType::class, ['attr' => ['style' => 'margin-bottom: 15px'], 'label' => 'Дата окончания' ])
+                ->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-info'], 'label' => 'Обновить задачу' ])
+                ->getForm();
+
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    // Get Data
+                    $name = $form['name']->getData();
+                    $category = $form['category']->getData();
+                    $description = $form['description']->getData();
+                    $priority = $form['priority']->getData();
+                    $due_date = $form['due_date']->getData();
+
+                    $now = new \DateTime('now');
+
+                    $em = $this->getDoctrine()->getManager();
+                    $todo = $em->getRepository('AppBundle:Todo')->find($id);
+
+                    $todo->setName($name);
+                    $todo->setCategory($category);
+                    $todo->setDescription($description);
+                    $todo->setPriority($priority);
+                    $todo->setDueDate($due_date);
+                    $todo->setCreateDate($now);
+
+
+
+                    $em->flush();
+
+                    $this->addFlash(
+                        'notice', 'Задача изменена'
+                    );
+
+                    return $this->redirectToRoute('todo_list');
+                }
+
+        return $this->render('todo/create.html.twig', [
+            'form' => $form->createView()
+            ]);
+
+        return $this->render('todo/edit.html.twig', [
+            'todo' => $todo
+        ]);;
     }
 
     /**
